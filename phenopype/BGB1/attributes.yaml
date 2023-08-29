@@ -1,0 +1,23 @@
+project_info:
+    date_created: '2023-08-29 09:15:13'
+    date_changed: '2023-08-29 09:15:13'
+    phenopype_version: 3.4.2
+reference:
+    scale1:
+        reference_source_path: D:\workspace\python\phenopype_projects\benthic_inverts\phenopype\BGB1\data\0__1_B1_mixed_02
+        reference_file_name: scale1_full_image.tif
+        template_file_name: scale1_search_template.tif
+        template_px_ratio: 20.815
+        unit: mm
+        date_added: '2023-08-29 09:26:59'
+project_data:
+    filenames:
+        - 1_B1_mixed_02.JPG
+        - 1_B2_mixed_02.JPG
+        - 1_OB_mixed_01.JPG
+        - 1_OB_mixed_02.JPG
+    dirnames:
+        - 0__1_B1_mixed_02
+        - 0__1_B2_mixed_02
+        - 0__1_OB_mixed_01
+        - 0__1_OB_mixed_02

@@ -1,0 +1,65 @@
+# Object detection with masking and reference detection
+# -----------------------------------------------------
+# Uses thresholding for segmentation, with an initial masking step 
+# to remove unwanted areas  ("include: true" to ONLY include specific
+# areas or "include: false" to EXCLUDE specific areas. If a template 
+# for a reference card has been created on the project level, 
+# "detect_reference" will attempt to find it in the current image, 
+# measure the current px-ratio, and exclude it detection. Also contains 
+# optional morphology operations to remove fine structures (see 
+# https://docs.opencv.org/master/db/df6/tutorial_erosion_dilatation.html 
+# for details), as well as an optional contour-editing step (clean up 
+# detected contours and detect again), and default visualization and 
+# export steps. Measure shape and texture features (optional).
+
+config_info:
+    config_name: pype_config_v1.yaml
+    date_created: '2023-05-22 19:08:56'
+    date_last_modified: '2023-05-22 19:15:30'
+    template_name: detection_mask_ref.yaml
+    template_path: D:\git-repos\phenopype\phenopype-templates\templates\detection\detection_mask_ref.yaml
+processing_steps:
+    - preprocessing:
+        - blur:
+            kernel_size: 5
+        - create_mask:
+            ANNOTATION: {type: mask, id: a, edit: false}
+            tool: rectangle
+            include: true
+        - detect_reference:
+            ANNOTATION: {type: reference, id: a, edit: false}
+    - segmentation:
+        - threshold:
+            method: binary
+            value: 200
+            channel: blue
+        - morphology:
+            operation: open
+            shape: cross
+            kernel_size: 5
+            iterations: 3
+        - morphology:
+            operation: close
+            shape: ellipse
+            kernel_size: 5
+            iterations: 3
+        - detect_contour:
+            ANNOTATION: {type: contour, id: a, edit: overwrite}
+            min_diameter: 0
+            min_area: 10000
+        - edit_contour
+        - detect_contour:
+            ANNOTATION: {type: contour, id: b, edit: overwrite}
+            min_diameter: 0
+            min_area: 10000
+    - visualization:
+        # - select_canvas:
+            # canvas: blue
+        - draw_contour
+        - draw_reference:
+            label: true
+            line_colour: red
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true

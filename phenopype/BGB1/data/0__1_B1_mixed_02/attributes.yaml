@@ -1,0 +1,15 @@
+image_original:
+    filename: 1_B1_mixed_02.JPG
+    width: 1620
+    height: 1080
+    filepath: D:\workspace\python\phenopype_projects\benthic_inverts\data_raw\1_B1_mixed_02.JPG
+    filetype: .JPG
+image_phenopype:
+    date_added: '2023-08-29 09:15:18'
+    mode: copy
+    filename: 1_B1_mixed_02_copy.JPG
+    width: 1620
+    height: 1080
+reference_global:
+    scale1:
+        active: true
